@@ -384,7 +384,7 @@ if st.button("Submit Test"):
 
         from googleapiclient.errors import HttpError
 
-def upload_to_drive(file_path, filename, folder_id, creds):
+    def upload_to_drive(file_path, filename, folder_id, creds):
         try:
             if not os.path.exists(file_path):
                 st.error(f"File not found: {file_path}")
