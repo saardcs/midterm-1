@@ -359,8 +359,8 @@ if st.button("Submit Test"):
 
         # Define your folder mapping for Drive
         DRIVE_FOLDERS = {
-            "1/11": "1-11",
-            "1/12": "1-12"
+            "1/11": "1NY3CXwbEhd3KVvZNTxwu5qjrTmVEt_5a",
+            "1/12": "1lfQOav8SeRCvVJnxfeBrLQjX4PA6rnyF"
         }
         folder_id = DRIVE_FOLDERS.get(selected_class)
 
@@ -372,10 +372,10 @@ if st.button("Submit Test"):
             pdf.set_font("Arial", size=10)
             pdf.multi_cell(0, 8, txt=json.dumps(data, indent=2))
             pdf.output(path)
-        pdf_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.pdf"
+        pdf_path = f"submissions/{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.pdf"
         create_submission_pdf(submission, pdf_path)
 
-        json_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.json"
+        json_path = {selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.json"
         with open(json_path, "w") as f:
             json.dump(submission, f, indent=2)
             
