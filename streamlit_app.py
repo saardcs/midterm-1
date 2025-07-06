@@ -331,11 +331,11 @@ if st.button("Submit Test"):
 
         
         # Save to file
-        import json, os
+        #import json, os
         os.makedirs("submissions", exist_ok=True)
-        file_path = f"submissions/{student_number}.json"
-        with open(file_path, "w") as f:
-            json.dump(submission, f, indent=2)
+        #file_path = f"submissions/{student_number}.json"
+        #with open(file_path, "w") as f:
+        #    json.dump(submission, f, indent=2)
 
         # st.markdown("### 📄 Submission Preview")
         # st.json(submission)
