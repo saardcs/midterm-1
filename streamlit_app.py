@@ -376,6 +376,9 @@ if st.button("Submit Test"):
         create_submission_pdf(submission, pdf_path)
 
         json_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.json"
+        with open(json_path, "w") as f:
+            json.dump(submission, f, indent=2)
+            
         from googleapiclient.discovery import build
         from googleapiclient.http import MediaFileUpload
 
