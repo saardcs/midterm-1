@@ -387,7 +387,7 @@ if st.button("Submit Test"):
             metadata = {"name": filename}
             if folder_id:
                 metadata["parents"] = [folder_id]
-                media = MediaFileUpload(file_path, resumable=True)
+                media = MediaFileUpload(file_path, resumable=False)
                 uploaded = service.files().create(body=metadata, media_body=media, fields="id").execute()
                 return uploaded.get("id")
 
