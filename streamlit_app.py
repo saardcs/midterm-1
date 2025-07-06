@@ -384,31 +384,31 @@ if st.button("Submit Test"):
 
         from googleapiclient.errors import HttpError
 
-    def upload_to_drive(file_path, filename, folder_id, creds):
-        try:
-            if not os.path.exists(file_path):
-                st.error(f"File not found: {file_path}")
-                return None
+        def upload_to_drive(file_path, filename, folder_id, creds):
+            try:
+                if not os.path.exists(file_path):
+                    st.error(f"File not found: {file_path}")
+                    return None
 
-            service = build("drive", "v3", credentials=creds)
-            metadata = {"name": filename}
-            if folder_id:
-                metadata["parents"] = [folder_id]
+                service = build("drive", "v3", credentials=creds)
+                metadata = {"name": filename}
+                if folder_id:
+                    metadata["parents"] = [folder_id]
 
-            media = MediaFileUpload(file_path, resumable=False)
-            uploaded = service.files().create(
-                body=metadata, media_body=media, fields="id"
-            ).execute()
+                media = MediaFileUpload(file_path, resumable=False)
+                uploaded = service.files().create(
+                    body=metadata, media_body=media, fields="id"
+                ).execute()
 
-            st.success(f"Uploaded to Drive: {filename}")
-            return uploaded.get("id")
+                st.success(f"Uploaded to Drive: {filename}")
+                return uploaded.get("id")
 
-        except HttpError as error:
-            st.error("❌ Google Drive upload failed.")
-            st.write(f"Error: {error}")
-            st.write(f"File: {file_path}")
-            st.write(f"Folder ID: {folder_id}")
-            raise
+            except HttpError as error:
+                st.error("❌ Google Drive upload failed.")
+                st.write(f"Error: {error}")
+                st.write(f"File: {file_path}")
+                st.write(f"Folder ID: {folder_id}")
+                raise
         upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
         upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
 
