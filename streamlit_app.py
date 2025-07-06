@@ -372,10 +372,10 @@ if st.button("Submit Test"):
             pdf.set_font("Arial", size=10)
             pdf.multi_cell(0, 8, txt=json.dumps(data, indent=2))
             pdf.output(path)
-        pdf_path = f"submissions/{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.pdf"
+        pdf_path = f'submissions/{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.pdf'
         create_submission_pdf(submission, pdf_path)
 
-        json_path = {selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.json"
+        json_path = f'{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.json'
         with open(json_path, "w") as f:
             json.dump(submission, f, indent=2)
             
