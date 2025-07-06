@@ -351,6 +351,35 @@ if st.button("Submit Test"):
         creds = Credentials.from_service_account_info(service_account_info, scopes=scopes)
         
         client = gspread.authorize(creds)
+        import datetime
+        
+        # Timestamp for filenames and sheets
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        filename_ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Define your folder mapping for Drive
+        DRIVE_FOLDERS = {
+            "1/11": "1-11",
+            "1/12": "1-12"
+        }
+        folder_id = DRIVE_FOLDERS.get(selected_class)
+
+        from fpdf import FPDF
+
+        def create_submission_pdf(data, path):
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=10)
+            pdf.multi_cell(0, 8, txt=json.dumps(data, indent=2))
+            pdf.output(path)
+        pdf_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.pdf"
+        create_submission_pdf(submission, pdf_path)
+
+        json_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.json"
+
+        upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
+        upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
+
         try:
             sheet = client.open("Midterm").worksheet(selected_class)
         except gspread.WorksheetNotFound:
@@ -364,7 +393,8 @@ if st.button("Submit Test"):
             submission["scores"]["part2_blocks"],
             submission["scores"]["part3_count"],
             submission["scores"]["part4_lcm"],
-            submission["scores"]["total"]
+            submission["scores"]["total"],
+            timestamp
             # add other fields or stringify answers if needed
         ]
 
