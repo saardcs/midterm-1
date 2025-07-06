@@ -257,18 +257,18 @@ def grade_lcm(tree_result, lcm_answer):
 
     return score
 
-if st.button("Grade Test"):
-    lcm_answer = st.session_state.get("lcm18", "")
-    if not tree_result:
-        tree_result = {}
+# if st.button("Grade Test"):
+#    lcm_answer = st.session_state.get("lcm18", "")
+#    if not tree_result:
+#        tree_result = {}
         
-    s1 = grade_sudoku(board, puzzle, solution)
-    s2 = grade_blocks()
-    s3 = grade_count()
-    s4 = grade_lcm(tree_result, lcm_answer)
+#    s1 = grade_sudoku(board, puzzle, solution)
+#    s2 = grade_blocks()
+#    s3 = grade_count()
+#    s4 = grade_lcm(tree_result, lcm_answer)
 
-    total = s1 + s2 + s3 + s4
-    st.success(f"Scores → Part I: {s1}/4 · Part II: {s2}/3 · Part III: {s3}/10 · Part IV: {s4}/3 · **Total: {total:.2f}/20**")
+#    total = s1 + s2 + s3 + s4
+#    st.success(f"Scores → Part I: {s1}/4 · Part II: {s2}/3 · Part III: {s3}/10 · Part IV: {s4}/3 · **Total: {total:.2f}/20**")
 
 decimal.getcontext().rounding = decimal.ROUND_HALF_UP
 
