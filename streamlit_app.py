@@ -376,6 +376,17 @@ if st.button("Submit Test"):
         create_submission_pdf(submission, pdf_path)
 
         json_path = f"submissions/{DRIVE_FOLDERS.get(selected_class)}_{nickname}_{student_number}_{filename_ts}.json"
+        from googleapiclient.discovery import build
+        from googleapiclient.http import MediaFileUpload
+
+        def upload_to_drive(file_path, filename, folder_id, creds):
+            service = build("drive", "v3", credentials=creds)
+            metadata = {"name": filename}
+            if folder_id:
+                metadata["parents"] = [folder_id]
+                media = MediaFileUpload(file_path, resumable=True)
+                uploaded = service.files().create(body=metadata, media_body=media, fields="id").execute()
+                return uploaded.get("id")
 
         upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
         upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
