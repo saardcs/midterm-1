@@ -382,15 +382,33 @@ if st.button("Submit Test"):
         from googleapiclient.discovery import build
         from googleapiclient.http import MediaFileUpload
 
-        def upload_to_drive(file_path, filename, folder_id, creds):
+        from googleapiclient.errors import HttpError
+
+def upload_to_drive(file_path, filename, folder_id, creds):
+        try:
+            if not os.path.exists(file_path):
+                st.error(f"File not found: {file_path}")
+                return None
+
             service = build("drive", "v3", credentials=creds)
             metadata = {"name": filename}
             if folder_id:
                 metadata["parents"] = [folder_id]
-                media = MediaFileUpload(file_path, resumable=False)
-                uploaded = service.files().create(body=metadata, media_body=media, fields="id").execute()
-                return uploaded.get("id")
 
+            media = MediaFileUpload(file_path, resumable=False)
+            uploaded = service.files().create(
+                body=metadata, media_body=media, fields="id"
+            ).execute()
+
+            st.success(f"Uploaded to Drive: {filename}")
+            return uploaded.get("id")
+
+        except HttpError as error:
+            st.error("❌ Google Drive upload failed.")
+            st.write(f"Error: {error}")
+            st.write(f"File: {file_path}")
+            st.write(f"Folder ID: {folder_id}")
+            raise
         upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
         upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
 
