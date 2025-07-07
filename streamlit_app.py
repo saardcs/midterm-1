@@ -364,7 +364,7 @@ if st.button("Submit Test"):
         }
         folder_id = DRIVE_FOLDERS.get(selected_class)
 
-        from fpdf import FPDF
+        # from fpdf import FPDF
 
         def create_submission_pdf(data, path):
             pdf = FPDF()
@@ -379,10 +379,10 @@ if st.button("Submit Test"):
         with open(json_path, "w") as f:
             json.dump(submission, f, indent=2)
             
-        from googleapiclient.discovery import build
-        from googleapiclient.http import MediaFileUpload
+        # from googleapiclient.discovery import build
+        # from googleapiclient.http import MediaFileUpload
 
-        from googleapiclient.errors import HttpError
+        # from googleapiclient.errors import HttpError
 
         def upload_to_drive(file_path, filename, folder_id, creds):
             try:
@@ -432,12 +432,14 @@ if st.button("Submit Test"):
 
         sheet.append_row(row)
         # st.success("Submission sent to Google Sheets! ✅")
-        st.success(f"Submission received! ✅ Total Score: {round(total)}/20")        
+        st.success(f"Submission received! ✅ Total Score: {round(total)}/20")
         
         with open(json_path, "rb") as f:
             st.download_button(
-                "🗂 Save your answers",
+            "Save answers",
                 data=f,
                 file_name=os.path.basename(json_path),
                 mime="application/json"
             )
+        
+        
