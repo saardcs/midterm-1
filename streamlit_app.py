@@ -436,10 +436,12 @@ if st.button("Submit Test"):
         
         with open(json_path, "rb") as f:
             st.download_button(
-            "Save answers",
+            "Download answers",
                 data=f,
                 file_name=os.path.basename(json_path),
                 mime="application/json"
             )
-        
+
+        # Success message after download button is shown
+        st.success("Your answers have been successfully downloaded! ✅")
         
