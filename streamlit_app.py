@@ -433,3 +433,19 @@ if st.button("Submit Test"):
         sheet.append_row(row)
         # st.success("Submission sent to Google Sheets! ✅")
         st.success(f"Submission received! ✅ Total Score: {round(total)}/20")
+        
+        with open(pdf_path, "rb") as f:
+            st.download_button(
+                "📄 Auto-download your PDF (click this to save)",
+                data=f,
+                file_name=os.path.basename(pdf_path),
+                mime="application/pdf"
+            )
+    
+        with open(json_path, "rb") as f:
+            st.download_button(
+                "🗂 Auto-download your JSON (click this to save)",
+                data=f,
+                file_name=os.path.basename(json_path),
+                mime="application/json"
+            )
