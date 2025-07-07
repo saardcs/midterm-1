@@ -373,7 +373,7 @@ if st.button("Submit Test"):
             pdf.multi_cell(0, 8, txt=json.dumps(data, indent=2))
             pdf.output(path)
         pdf_path = f'submissions/{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.pdf'
-        create_submission_pdf(submission, pdf_path)
+        # create_submission_pdf(submission, pdf_path)
 
         json_path = f'{selected_class.replace("/", "-")}_{nickname}_{student_number}_{filename_ts}.json'
         with open(json_path, "w") as f:
@@ -432,19 +432,11 @@ if st.button("Submit Test"):
 
         sheet.append_row(row)
         # st.success("Submission sent to Google Sheets! ✅")
-        st.success(f"Submission received! ✅ Total Score: {round(total)}/20")
+        st.success(f"Submission received! ✅ Total Score: {round(total)}/20")        
         
-        with open(pdf_path, "rb") as f:
-            st.download_button(
-                "📄 Auto-download your PDF (click this to save)",
-                data=f,
-                file_name=os.path.basename(pdf_path),
-                mime="application/pdf"
-            )
-    
         with open(json_path, "rb") as f:
             st.download_button(
-                "🗂 Auto-download your JSON (click this to save)",
+                "🗂 Save your answers",
                 data=f,
                 file_name=os.path.basename(json_path),
                 mime="application/json"
