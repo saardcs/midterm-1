@@ -441,7 +441,3 @@ if st.button("Submit Test"):
                 file_name=os.path.basename(json_path),
                 mime="application/json"
             )
-
-        # Success message after download button is shown
-        st.success("Your answers have been successfully downloaded! ✅")
-        
