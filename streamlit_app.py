@@ -409,8 +409,8 @@ if st.button("Submit Test"):
                 st.write(f"File: {file_path}")
                 st.write(f"Folder ID: {folder_id}")
                 raise
-        upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
-        upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
+        # upload_to_drive(json_path, os.path.basename(json_path), folder_id, creds)
+        # upload_to_drive(pdf_path, os.path.basename(pdf_path), folder_id, creds)
 
         try:
             sheet = client.open("Midterm").worksheet(selected_class)
