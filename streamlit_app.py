@@ -12,27 +12,14 @@ selected_class = st.selectbox("Select your class:", class_options)
 nickname = st.text_input("Nickname")
 student_number = st.text_input("Student Number")
 
+answers = st.secrets["answers"]
+
 # ==== Part I: Sudoku Puzzle (3pts) ====
 st.header("Part I: Sudoku Puzzle (4pts)")
 st.write("**Instruction:** Solve the 6x6 Sudoku puzzle using the numbers 1 to 6.")
 
-puzzle = [
-    [2, 0, 0, 6, 1, 0],
-    [6, 0, 5, 0, 0, 0],
-    [0, 0, 0, 0, 0, 2],
-    [0, 2, 4, 1, 0, 0],
-    [0, 3, 6, 0, 2, 0],
-    [1, 0, 0, 0, 4, 0]
-]
-
-solution = [
-    [2, 4, 3, 6, 1, 5],
-    [6, 1, 5, 2, 3, 4],
-    [3, 6, 1, 4, 5, 2],
-    [5, 2, 4, 1, 6, 3],
-    [4, 3, 6, 5, 2, 1],
-    [1, 5, 2, 3, 4, 6]
-]
+puzzle = st.secrets["sudoku"]["puzzle"]
+solution = st.secrets["sudoku"]["solution"]
 
 sudoku = components.declare_component("sudoku", path="sudoku_component")
 # Call the sudoku component passing the puzzle as default
@@ -63,19 +50,19 @@ for i, col in enumerate(cols):
 questions_3_7 = {
     3: ("How many three block towers can you make out of them?", 
         ["a. 5", "b. 6", "c. 8", "d. 12"], 
-        "b"),
+        answers["q3"]),
     4: ("If there is a restriction that you cannot put the red block at the top, how many towers can you make?", 
         ["a. 2", "b. 4", "c. 6", "d. 8"], 
-        "b"),
+        answers["q4"]),
     5: ("If there is a restriction that you cannot put the red block and blue block at the top, how many towers can you make?", 
         ["a. 2", "b. 4", "c. 6", "d. 8"], 
-        "a"),
+        answers["q5"]),
     6: ("If there is a restriction that you cannot put the yellow block at the bottom, how many towers can you make?", 
         ["a. 2", "b. 4", "c. 6", "d. 8"], 
-        "b"),
+        answers["q6"]),
     7: ("If there is a restriction that you cannot put the blue or yellow in the middle, how many towers can you make?", 
         ["a. 2", "b. 4", "c. 6", "d. 8"], 
-        "a"),
+        answers["q7"]),
 }
 
 for qnum in questions_3_7:
@@ -93,22 +80,22 @@ st.image("5ch.png")
 questions_8_12 = {
     8: ("What characters can make up the code?", 
         ["a. 10 numbers", "b. 26 letters", "c. 10 numbers and 26 letters", "d. 10 numbers and 52 letters"], 
-        "d"),
+        answers["q8"]),
     9: ("What sets of characters can the code contain?", 
         ["a. a-z (lowercase letters)", "b. 0-9 (numbers)", "c. A-Z (uppercase letters)", "d. All of the above"], 
-        "d"),
+        answers["q9"]),
     10: ("How many possible characters are there for the first spot in the password?", 
          ["a. 60 possible letters and numbers", "b. 62 possible letters and numbers", "c. 61 possible letters and numbers", "d. 59 possible letters and numbers"], 
-         "b"),
+         answers["q10"]),
     11: ("How many possible characters are there for the fifth spot in the password?", 
          ["a. 60 possible letters and numbers", "b. 62 possible letters and numbers", "c. 61 possible letters and numbers", "d. 59 possible letters and numbers"], 
-         "b"),
+         answers["q11"]),
     12: ("How many total password combinations are possible?", 
          ["a. 44,261,653,680 possible combinations", 
           "b. 916,132,832 possible combinations", 
           "c. 776,520,240 possible combinations", 
           "d. 13,388,280 possible combinations"], 
-         "b"),
+         answers["q12"]),
 }
 
 for qnum in questions_8_12:
@@ -125,22 +112,22 @@ st.image("5ch.png")
 questions_13_17 = {
     13: ("What characters can make up the code?", 
          ["a. 10 numbers", "b. 26 letters", "c. 10 numbers and 26 letters", "d. 10 numbers and 52 letters"], 
-         "a"),
+         answers["q13"]),
     14: ("What sets of characters can the code contain?", 
          ["a. a-z (lowercase letters)", "b. 0-9 (numbers)", "c. A-Z (uppercase letters)", "d. All of the above"], 
-         "b"),
+         answers["q14"]),
     15: ("How many possible characters are there for the first spot in the password?", 
          ["a. 52 possible letters and numbers", "b. 10 possible numbers", "c. 62 possible letters and numbers", "d. 9 possible numbers"], 
-         "b"),
+         answers["q15"]),
     16: ("How many possible characters are there for the fifth spot in the password?", 
          ["a. 52 possible letters and numbers", "b. 10 possible numbers", "c. 62 possible letters and numbers", "d. 6 possible numbers"], 
-         "d"),
+         answers["q16"]),
     17: ("How many total password combinations are possible?", 
          ["a. 44,261,653,680 possible combinations", 
           "b. 380,204,032 possible combinations", 
           "c. 100,000 possible combinations", 
           "d. 30,240 possible combinations"], 
-         "d"),
+         answers["q17"]),
 }
 
 for qnum in questions_13_17:
@@ -248,7 +235,7 @@ def grade_lcm(tree_result, lcm_answer):
     score = 0
 
     # 1 point for LCM question 18
-    correct_lcm_answer = "35"
+    correct_lcm_answer = answers["lcm"]
     if lcm_answer.strip() == correct_lcm_answer:
         score += 1
 
