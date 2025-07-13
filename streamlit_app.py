@@ -207,24 +207,25 @@ def grade_trees(tree_result):
     score = 0
     if not tree_result:
         tree_result = {}
-    
-    # Tree 1: 30 = 6 × 5, with 6 = 2 × 3
+        
+    tree_answers = answers["factor_trees"]
+    # Tree 1
     t1_node1 = tree_result.get("tree1", {}).get("node1", "").strip()
     t1_leaf1 = tree_result.get("tree1", {}).get("leaf1", "").strip()
     t1_leaf2 = tree_result.get("tree1", {}).get("leaf2", "").strip()
 
-    if t1_node1 == "6" and sorted([t1_leaf1, t1_leaf2]) == ["2", "3"]:
+    if t1_node1 == tree_answers["t1_node1"] and sorted([t1_leaf1, t1_leaf2]) == tree_answers["t1_leaves"]:
         score += 1
 
-    # Tree 2: 90 = 10 × 9, with leaves under 10 and 9 respectively
+    # Tree 2
     t2_node1 = tree_result.get("tree2", {}).get("node1", "").strip()
     t2_leaf1_left = tree_result.get("tree2", {}).get("leaf1_left", "").strip()
     t2_leaf2_left = tree_result.get("tree2", {}).get("leaf2_left", "").strip()
     t2_leaf1 = tree_result.get("tree2", {}).get("leaf1", "").strip()
     t2_leaf2 = tree_result.get("tree2", {}).get("leaf2", "").strip()
 
-    left_correct = sorted([t2_leaf1_left, t2_leaf2_left]) == ["2", "5"]
-    right_correct = (t2_node1 == "9" and sorted([t2_leaf1, t2_leaf2]) == ["3", "3"])
+    left_correct = sorted([t2_leaf1_left, t2_leaf2_left]) == tree_answers["t2_leaves_left"]
+    right_correct = (t2_node1 == tree_answers["t2_node1"] and sorted([t2_leaf1, t2_leaf2]) == tree_answers["t2_leaves"])
 
     if left_correct and right_correct:
         score += 1
