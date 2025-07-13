@@ -46,7 +46,7 @@ st.write("**Instruction:** Given the colors below, make the possible combination
 # Question 2 - Placeholder
 st.write("**2. Color the following tower of blocks of the possible combinations you can make based on the statement above.**")
 
-colors = ["", "R", "B", "Y"]
+colors = ["", "Red", "Blue", "Yellow"]
 tower_inputs = {}
 
 # Display 6 towers side by side
@@ -186,7 +186,7 @@ def grade_blocks():
             correct += 0.5
 
     # Grading Q2 (tower permutations)
-    valid_towers = list(permutations(['R', 'B', 'Y']))
+    valid_towers = list(permutations(['Red', 'Blue', 'Yellow']))
     student_towers = []
 
     for i in range(6):
@@ -195,7 +195,7 @@ def grade_blocks():
             st.session_state.get(f"tower{i}_block1", ""),
             st.session_state.get(f"tower{i}_block2", "")
         ]
-        if all(c in ("R", "B", "Y") for c in t) and len(set(t)) == 3:
+        if all(c in ("Red", "Blue", "Yellow") for c in t) and len(set(t)) == 3:
             student_towers.append(tuple(t))
 
     # Count unique valid permutations
