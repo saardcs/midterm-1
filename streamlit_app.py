@@ -29,7 +29,7 @@ board = sudoku(default=puzzle)
 # ==== Part II: Counting Combinations I (3pts) ====
 st.header("Part II: Counting Combinations I (3pts)")
 st.write("**Instruction:** Given the colors below, make the possible combinations and answer the following questions. Then circle the correct answer to the question below.")
-
+st.image("rby.png")
 # Question 2 - Placeholder
 st.write("**2. Color the following tower of blocks of the possible combinations you can make based on the statement above.**")
 
